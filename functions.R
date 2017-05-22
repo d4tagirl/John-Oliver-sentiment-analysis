@@ -79,3 +79,16 @@ get_1_video_comments <- function(video_id, n = 5) {
 get_comments_dani <- function(videos, n = 10){
   comments <- pmap_df(list(videos, n), get_1_video_comments)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
