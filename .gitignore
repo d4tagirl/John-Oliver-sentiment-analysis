@@ -1,8 +1,12 @@
 .Rproj.user
 .Rhistory
 .RData
+.Rdata
 .Ruserdata
 packrat/lib*/
 .httr-oauth
 .Rdata
 lwt_image.Rdata
+yt_comments.csv
+data.Rdata
+sentiment.Rdata
