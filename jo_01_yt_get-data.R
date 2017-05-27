@@ -37,27 +37,37 @@ videos <- get_videos(lwt_playlist_id) %>%
          vid_created = as.Date(created)) %>% 
   select(-created)
 
+# # --- extract .csv for blog post ----
+# 
+# write.csv(videos, 'videos.csv')
+# 
+# # --------------------------------
+
 # check how many videos I have
 nrow(videos)
 
 # get comments from videos
 raw_yt_comments <- get_comments_dani(videos$id, n = 300)
 
-raw_yt_comments <- raw_yt_comments %>% 
-  mutate(com_created = as.Date(com_created)) %>%
-  filter(com_text != "")
-
 # --------- processing Youtube data -----------
 
 # join comments with videos, and filter videos with less than 100 comments
 
 yt_comments <- raw_yt_comments %>%
+  mutate(com_created = as.Date(com_created)) %>%
+  filter(com_text != "")
   left_join(videos, by = c("video_id" = "id")) %>%
   group_by(short_title) %>% 
   mutate(n = n(),
          com_created = as.Date(com_created)) %>% 
   ungroup() %>% 
   filter(n >= 100)
+  
+  # # --- extract .csv for blog post ----
+  # 
+  # write.csv(yt_comments, 'yt_comments.csv')
+  # 
+  # # --------------------------------
 
 
 # save all downloaded data!
