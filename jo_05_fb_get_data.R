@@ -40,5 +40,10 @@ fb_comments <- fb_comments %>%
   filter(n >= 100) %>% 
   select(short_title, video_id = ids, post_id_fb, com_text, com_id, com_created)
 
+# # --- extract .csv for blog post ----
+# 
+# write.csv(fb_comments, 'fb_comments.csv')
+# 
+# # --------------------------------
 
 save.image("data.Rdata")

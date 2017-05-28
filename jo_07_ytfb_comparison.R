@@ -30,22 +30,18 @@ comments_by_title %>%
 
 library(plotly)
 ggplotly(comments_by_title %>%
-  # gather(variable, value, -video_created,
-  #        -short_title, -diff, -abs_diff,
-  #        -diff_mean, abs_diff_mean) %>%
   mutate(short_title = reorder(short_title, video_created)) %>%
   
-  ggplot(aes(x = short_title)) +
+  ggplot(aes(x = short_title, text = paste(short_title, "<br />",  video_created))) +
   geom_line(aes(y = mean_sent_fb, group = 1), color = "blue") +
   geom_line(aes(y = mean_sent_yt, group = 1), color = "red") +
   # coord_flip() +
   geom_hline(yintercept = 0) +
-  theme_bw() +
-  theme(axis.title.x = element_blank(), axis.title.y = element_blank(),
-        axis.line = element_line(colour = "grey"), legend.position = "none",
-        panel.grid.major = element_blank(), panel.border = element_blank(),
-        axis.text.x = element_text(angle = 90, hjust = 1)),
-  tooltip = c("short_title"))
+  xlab(NULL) +
+  ylab(NULL) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank()),
+tooltip = "text")
 
 
 # difference in sentiment (bars) between both ordered by short_title
@@ -76,7 +72,7 @@ comments_by_title %>%
 ########### compare evolution of comments ###########
 
 
-test <- fb_month_sent %>% 
+fb_month_sent %>% 
   inner_join(yt_month_sent, by = "month") %>%
   mutate(month = as.Date(paste(month, 1, sep = "-"), "%Y-%m-%d")) %>% 
   select(month, 

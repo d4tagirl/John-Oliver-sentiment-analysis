@@ -159,9 +159,7 @@ fb_title_sent %>%
 most_used <- tidy_fb_comments %>%  
   inner_join(get_sentiments("bing"), by = "word") %>%
   count(word, sentiment, sort = TRUE) %>%
-  ungroup()
-
-most_used %>%
+  ungroup() %>%
   group_by(sentiment) %>%
   top_n(10) %>%
   ungroup() %>%
