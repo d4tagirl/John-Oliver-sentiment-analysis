@@ -38,7 +38,7 @@ fb_comments <- fb_comments %>%
          com_created = as.Date(com_created)) %>% 
   ungroup() %>% 
   filter(n >= 100) %>% 
-  select(short_title, video_id = ids, post_id_fb, com_text, com_id, com_created)
+  select(short_title, video_id = ids, vid_created, post_id_fb, com_text, com_id, com_created)
 
 # # --- extract .csv for blog post ----
 # 
